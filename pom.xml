@@ -135,10 +135,10 @@
           <showDeprecation>true</showDeprecation>
           <showWarnings>true</showWarnings>
           <optimize>true</optimize>
+          <compilerArgs>
+            <arg>-parameters</arg>
+          </compilerArgs>
         </configuration>
-        <compilerArgs>
-          <arg>-parameters</arg>
-        </compilerArgs>
       </plugin>
       <plugin>
         <groupId>org.springframework.boot</groupId>
