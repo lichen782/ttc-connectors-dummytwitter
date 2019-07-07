@@ -46,6 +46,7 @@ pipeline {
             // so we can retrieve the version in later steps
             sh "echo \$(jx-release-version) > VERSION"
             sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
+            sh "mvn clean install"
           }
           dir ('./charts/ttc-connectors-dummytwitter') {
             container('maven') {
@@ -53,7 +54,7 @@ pipeline {
             }
           }
           container('maven') {
-            sh 'mvn clean deploy'
+            sh 'mvn deploy -DskipTests'
 
             sh 'export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml'
             sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
